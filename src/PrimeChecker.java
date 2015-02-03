@@ -17,7 +17,7 @@ public class PrimeChecker {
     }
 
     private static boolean primeCheck(int n) {
-        for(int i = 2; i<n; i++) {
+        for(int i = 2; i<(n/2+1); i++) {
             int remainder = n % i;
             if (remainder == 0) {
                 return false;
