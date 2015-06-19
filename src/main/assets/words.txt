@@ -1,0 +1,238 @@
+1. Unit tests, integration tests and performance tests
+
+1.1. Unit tests and unit testing
+
+A unit test is a piece of code written by a developer that executes a specific functionality in the code to be tested and asserts a certain behavior or state.
+
+The percentage of code which is tested by unit tests is typically called test coverage.
+
+A unit test targets a small unit of code, e.g., a method or a class, (local tests). External dependencies should be removed for unit tests, e.g., by replacing the dependency with a test implementation or a (mock) object created by a test framework.
+
+Unit tests are not suitable for testing complex user interface or component interaction. For this you should develop integration tests.
+
+1.2. Integration tests
+
+An integration test has the target to test the behavior of a component or the integration between a set of components. The term functional test is sometimes used as synonym for integration test.
+
+This kind of tests allow you to translate your user stories into a test suite, i.e., the test would resemble an expected user interaction with the application.
+
+1.3. Performance tests
+
+Performance tests are used to benchmark software components repeatedly.
+
+1.4. Building effective tests
+
+Software unit tests allow you to easily verify that the logic of individual units is correct.
+
+Running unit tests after every build or code change help to identify software regressions introduced by these new changes. Having a high test coverage of your code allows you to continue developing features without having to perform lots of manual tests.
+
+Integration tests check that the whole system works as intended, also reducing the need for intensive manual tests and performance tests allow to ensure that the whole application also works under high load.
+
+2. Testing terminology
+
+2.1. Test fixture
+
+The test fixture is a fixed state of the software under test used as a baseline for running tests.
+
+2.2. Behavior vs. state testing
+
+A test is a behavior test (also called interaction test) if it does not validate the result of a method call, but checks if certain methods were called with the correct input parameters.
+
+State testing is about validating the result, while behavior testing is about testing the behavior of the application under test.
+
+If you are testing algorithms or system functionality, you want to test in most cases state and not interactions. A typical test setup uses mocks or stubs of related classes to abstract the interactions with these other classes away and tests state in the object which is tested.
+
+3. Test organization
+
+3.1. Test organization for Java projects
+
+Typical unit tests are created in a separate project or separate source folder to keep the test code separate from the real code.
+
+3.2. What should you test?
+
+What should be tested is a hot topic for discussion. Some developers believe every statement in your code should be tested.
+
+In general it is safe to ignore trivial code as, for example, getter and setter methods which simply assign values to fields. Writing tests for these statements is time consuming and pointless, as you would be testing the Java virtual machine. The JVM itself already has test cases for this and you are safe to assume that field assignment works in Java if you are developing end user applications.
+
+You should write software tests in any case for the critical and complex parts of your application. A solid test suite also protects you against regression in existing code if you introduce new features.
+
+3.3. Introducing tests in legacy code
+
+If you start developing tests for an existing code base without any tests, it is good practice to start writing tests for the parts of the application in which most errors happened in the past. This way you can focus on the critical parts of your application.
+
+4. Testing frameworks for Java
+
+Where are several testing frameworks available for Java. The most popular ones are JUnit and TestNG.
+
+This description focuses at JUnit.
+
+5. Using JUnit
+
+5.1. The JUnit framework
+
+JUnit in version 4.x is a test framework which uses annotations to identify methods that specify a test.
+
+The main websites for JUnit are the JUnit homepage and the GitHub project page.
+
+5.2. How to define a test in JUnit?
+
+A JUnit test is a method contained in a class which is only used for testing. This is called a Test class.
+
+To write a test with the JUnit 4.x framework you annotate a method with the @org.junit.Test annotation.
+
+In this method you use an assert method, typically provided by the JUnit or another assert framework, to check the expected result of the code execution versus the actual result. These method calls are typically called asserts or assert statements.
+
+You should provide meaningful messages in assert statements so that it is easier for the developer to identify the problem. This helps in fixing the issue, especially if someone looks at the problem, who did not write the code under test or the test code.
+
+5.3. Example JUnit test
+
+The following code shows a JUnit test. This test assumes that the MyClass class exists and has a multiply(int, init) method.
+
+package org.eclipse.e4.core.internal.tests;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class MyTests {
+
+  @Test
+  public void multiplicationOfZeroIntegersShouldReturnZero() {
+
+    // MyClass is tested
+    MyClass tester = new MyClass();
+
+    // assert statements
+    assertEquals("10 x 0 must be 0", 0, tester.multiply(10, 0));
+    assertEquals("0 x 10 must be 0", 0, tester.multiply(0, 10));
+    assertEquals("0 x 0 must be 0", 0, tester.multiply(0, 0));
+  }
+
+}
+5.4. JUnit naming conventions
+
+There are several potential naming conventions for JUnit tests. In widespread use is to use the name of the class under test and to add the "Test" suffix to the test class.
+
+For the test method names it is frequently recommended to use the word "should" in the test method name, as for example "ordersShouldBeCreated" or "menuShouldGetActive" as this gives a good hint what should happen if the test method is executed.
+
+As a general rule, a test name should explain what the test does so that it can be avoided to read the actual implementation.
+
+5.5. JUnit naming conventions for Maven
+
+If you are using the Maven build system, you should prefer the "Test" suffix over "Tests" as the Maven build system (via its surfire plug-in) automatically includes such classes in its test scope.
+
+5.6. JUnit test suites
+
+If you have several test classes, you can combine them into a test suite. Running a test suite will execute all test classes in that suite in the specified order.
+
+The following example code shows a test suite which defines that two test classes (MyClassTest and MySecondClassTest) should be executed. If you want to add another test class you can add it to @Suite.SuiteClasses statement.
+
+package com.vogella.junit.first;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+@RunWith(Suite.class)
+@SuiteClasses({ MyClassTest.class, MySecondClassTest.class })
+public class AllTests {
+
+}
+A test suite can also contain other test suites.
+
+5.7. Run your test from the command line
+
+You can also run your JUnit tests outside Eclipse via standard Java code. Build frameworks like Apache Maven or Gradle in combination with a Continuous Integration Server (like Hudson or Jenkins) are typically used to execute tests automatically on a regular basis.
+
+The org.junit.runner.JUnitCore class provides the runClasses() method which allows you to run one or several tests classes. As a return parameter you receive an object of the type org.junit.runner.Result. This object can be used to retrieve information about the tests.
+
+The following class demonstrates how to run the MyClassTest. This class will execute your test class and write potential failures to the console.
+
+package de.vogella.junit.first;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class MyTestRunner {
+  public static void main(String[] args) {
+    Result result = JUnitCore.runClasses(MyClassTest.class);
+    for (Failure failure : result.getFailures()) {
+      System.out.println(failure.toString());
+    }
+  }
+}
+This class can be executed like any other Java program on the command line. You only need to add the JUnit library JAR file to the classpath.
+
+6. Basic JUnit code constructs
+
+6.1. Available JUnit annotations
+
+JUnit 4.x uses annotations to mark methods as test methods and to configure them. The following table gives an overview of the most important annotations in JUnit.
+
+Table 1. Annotations
+
+Annotation	Description
+@Test
+public void method()
+
+The @Test annotation identifies a method as a test method.
+@Test (expected = Exception.class)	Fails if the method does not throw the named exception.
+@Test(timeout=100)	Fails if the method takes longer than 100 milliseconds.
+@Before
+public void method()	This method is executed before each test. It is used to prepare the test environment (e.g., read input data, initialize the class).
+@After
+public void method()	This method is executed after each test. It is used to cleanup the test environment (e.g., delete temporary data, restore defaults). It can also save memory by cleaning up expensive memory structures.
+@BeforeClass
+public static void method()	This method is executed once, before the start of all tests. It is used to perform time intensive activities, for example, to connect to a database. Methods marked with this annotation need to be defined as static to work with JUnit.
+@AfterClass
+public static void method()	This method is executed once, after all tests have been finished. It is used to perform clean-up activities, for example, to disconnect from a database. Methods annotated with this annotation need to be defined as static to work with JUnit.
+@Ignore or @Ignore("Why disabled")	Ignores the test method. This is useful when the underlying code has been changed and the test case has not yet been adapted. Or if the execution time of this test is too long to be included. It is best practice to provide the optional description, why the test is disabled.
+
+6.2. Assert statements
+
+JUnit provides static methods in the Assert class to test for certain conditions. These assert statements typically start with assert and allow you to specify the error message, the expected and the actual result. An assertion method compares the actual value returned by a test to the expected value, and throws an AssertionException if the comparison test fails.
+
+The following table gives an overview of these methods. Parameters in [] brackets are optional and of type String.
+
+Table 2. Methods to assert test results
+
+Statement	Description
+fail(message)	Let the method fail. Might be used to check that a certain part of the code is not reached or to have a failing test before the test code is implemented. The message parameter is optional.
+assertTrue([message,] boolean condition)	Checks that the boolean condition is true.
+assertFalse([message,] boolean condition)	Checks that the boolean condition is false.
+assertEquals([message,] expected, actual)	Tests that two values are the same. Note: for arrays the reference is checked not the content of the arrays.
+assertEquals([message,] expected, actual, tolerance)	Test that float or double values match. The tolerance is the number of decimals which must be the same.
+assertNull([message,] object)	Checks that the object is null.
+assertNotNull([message,] object)	Checks that the object is not null.
+assertSame([message,] expected, actual)	Checks that both variables refer to the same object.
+assertNotSame([message,] expected, actual)	Checks that both variables refer to different objects.
+
+6.3. Test execution order
+
+JUnit assumes that all test methods can be executed in an arbitrary order. Well-written test code should not assume any order, i.e., tests should not depend on other tests.
+
+As of JUnit 4.11 the default which may vary from run to run.t is to use a deterministic, but not predictable, order for the execution of the tests
+
+You can use an annotation to define that the test methods are sorted by method name, in lexicographic order. To activate this feature, annotate your test class with the @FixMethodOrder(MethodSorters.NAME_ASCENDING) annotation. You can also explicitely set the default by using the MethodSorters.DEFAULT parameter in this annotation. You can also use MethodSorters.JVM which uses the JVM defaults, which may vary from run to run.
+
+7. Installation of JUnit
+
+7.1. Using JUnit with Gradle
+
+To use JUnit in your Gradle build, simply add a testCompile dependency to it.
+
+apply plugin: 'java'
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+}
+7.2. Using JUnit integrated into Eclipse
+
+The Eclipse IDE ships with a version of JUnit. If you use Eclipse, no additional download is required.
+
+7.3. Downloading the JUnit library
+
+If you want to control the used JUnit library explicitly, download JUnit4.x.jar from the following JUnit website. The download contains the junit-4.*.jar which is the JUnit library. Add this library to your Java project and add it to the classpath.
+
+http://junit.org/

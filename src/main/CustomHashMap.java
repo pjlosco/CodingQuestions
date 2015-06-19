@@ -1,3 +1,5 @@
+package main;
+
 public class CustomHashMap {
     private final static int TABLE_SIZE = 128;
 

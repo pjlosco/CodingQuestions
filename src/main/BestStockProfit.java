@@ -1,6 +1,7 @@
+package main;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.Assert.*;
 
 public class BestStockProfit {
 
@@ -43,10 +44,21 @@ public class BestStockProfit {
         Assert.assertEquals("Empty: ", bestPrice(prices), 0);
     }
 
+    @Test
+    public void nullTest() {
+        int[] prices = null;
+        Assert.assertEquals("Empty: ", bestPrice(prices), 0);
+    }
 
     @Test
-    public void variation() {
+    public void variation1() {
         int[] prices = new int[] {7,4,3,1,2,3,4,5,4,3,5,6,7,5,3,2,1,10};
+        Assert.assertEquals("Variation: ", bestPrice(prices), 9);
+    }
+
+    @Test
+    public void variation2() {
+        int[] prices = new int[] {2,4,3,6,1,3,4,5,4,3,5,6,7,5,3,2,1,10};
         Assert.assertEquals("Variation: ", bestPrice(prices), 9);
     }
 
