@@ -31,15 +31,15 @@ public class LinkedList {
         }
         return restOfList;
 
-        LinkedList reversedPart = null;
-        LinkedList current = head;
-        while (restOfList != null) {
-            LinkedList next = current.restOfList;
-            restOfList.restOfList = reversedPart;
-            reversedPart = current;
-            current = next;
-        }
-        head = reversedPart;
+//        LinkedList reversedPart = null;
+//        LinkedList current = head;
+//        while (restOfList != null) {
+//            LinkedList next = current.restOfList;
+//            restOfList.restOfList = reversedPart;
+//            reversedPart = current;
+//            current = next;
+//        }
+//        head = reversedPart;
     }
 
     public void addNewNode(int newValue) {
