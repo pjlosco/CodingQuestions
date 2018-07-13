@@ -1,5 +1,3 @@
-package main;
-
 /**
  * Sort arrays and then merge them in order
  */

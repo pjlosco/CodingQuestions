@@ -1,8 +1,4 @@
-package test;
-
-
 import junit.framework.Assert;
-import main.MergeIntArray;
 import org.junit.Test;
 
 public class MergeIntArrayTests {

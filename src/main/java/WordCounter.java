@@ -1,5 +1,3 @@
-package main;
-
 import org.junit.Test;
 
 import java.io.*;
@@ -44,7 +42,7 @@ public class WordCounter {
     @Test
     public void GoodInput() {
         try {
-            WordCounter wc = new WordCounter(new File("E:\\Code\\CodingQuestions\\src\\test\\assets\\words.txt"));
+            WordCounter wc = new WordCounter(new File("E:\\Code\\CodingQuestions\\src\\test\\resources\\words.txt"));
             assertEquals(85, wc.getWordOccurance("test"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +52,7 @@ public class WordCounter {
     @Test
     public void EmptyFile() {
         try {
-            WordCounter wc = new WordCounter(new File("E:\\Code\\CodingQuestions\\src\\test\\assets\\nowords.txt"));
+            WordCounter wc = new WordCounter(new File("E:\\Code\\CodingQuestions\\src\\test\\resources\\nowords.txt"));
             assertEquals(0, wc.size());
         } catch (IOException e) {
             e.printStackTrace();

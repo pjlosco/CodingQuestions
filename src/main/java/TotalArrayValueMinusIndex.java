@@ -1,5 +1,3 @@
-package main;
-
 /**
  * Write a function get_products_of_all_ints_except_at_index()
  * that takes an array of integers and returns an array of the products.

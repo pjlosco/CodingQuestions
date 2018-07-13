@@ -1,7 +1,4 @@
-package test;
-
 import junit.framework.Assert;
-import main.RandomPersonPickerFromCountry;
 import org.junit.Test;
 
 import java.util.HashMap;

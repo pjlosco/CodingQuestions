@@ -1,5 +1,3 @@
-package main;
-
 public class PloscoMap<K,V> {
     private int size;
     final int capacity = 16;

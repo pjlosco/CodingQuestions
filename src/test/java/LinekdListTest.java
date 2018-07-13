@@ -1,7 +1,4 @@
-package test;
-
 import junit.framework.Assert;
-import main.LinkedList;
 import org.junit.Test;
 
 /**
