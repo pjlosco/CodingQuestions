@@ -21,4 +21,9 @@ public class GCDTest {
     public void input3Test() {
         Assert.assertEquals(gcd.generalizedGCD(5, new int[]{5, 10, 15, 20, 25}), 5);
     }
+
+    @Test
+    public void input4Test() {
+        Assert.assertEquals(gcd.generalizedGCD(5, new int[]{10, 10, 10, 20, 20}), 10);
+    }
 }
