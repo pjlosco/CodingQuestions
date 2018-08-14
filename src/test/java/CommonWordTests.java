@@ -8,7 +8,7 @@ public class CommonWordTests {
     CommonWords solution = new CommonWords();
 
     /**
-     * Input: 
+     * Input:
      *   literatureText = “Jack and Jill went to the market to buy bread and cheese. Cheese is Jack's and Jill’s favorite food.”
      *   wordsToExclude = ["and", "he", "the", "to", "is", "Jack", "Jill"]
      * Output:
