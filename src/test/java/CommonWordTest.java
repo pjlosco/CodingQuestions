@@ -3,7 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class CommonWordTests {
+public class CommonWordTest {
 
     CommonWords solution = new CommonWords();
 

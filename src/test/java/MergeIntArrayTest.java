@@ -1,7 +1,7 @@
 import junit.framework.Assert;
 import org.junit.Test;
 
-public class MergeIntArrayTests {
+public class MergeIntArrayTest {
 
     public void printSet(int[] set, String setName) {
         System.out.print(setName + ": {");
