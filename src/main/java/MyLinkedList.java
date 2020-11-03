@@ -1,12 +1,12 @@
 /**
  * Created by patricklosco on 2/3/15.
  */
-public class LinkedList {
+public class MyLinkedList {
 
     private int value;
-    private LinkedList restOfList;
+    private MyLinkedList restOfList;
 
-    public LinkedList(int value, LinkedList restOfList) {
+    public MyLinkedList(int value, MyLinkedList restOfList) {
         this.value = value;
         this.restOfList = restOfList;
     }
@@ -15,12 +15,12 @@ public class LinkedList {
         return value;
     }
 
-    public LinkedList getRestOfList() {
+    public MyLinkedList getRestOfList() {
         return restOfList;
     }
 
-    public LinkedList reverseList() {
-        LinkedList backwardsList = new LinkedList(value, null);
+    public MyLinkedList reverseList() {
+        MyLinkedList backwardsList = new MyLinkedList(value, null);
         if (restOfList != null) {
             restOfList.reverseList();
             restOfList.addNewLink(backwardsList);
@@ -41,11 +41,11 @@ public class LinkedList {
     }
 
     public void addNewNode(int newValue) {
-        restOfList = new LinkedList(value,restOfList);
+        restOfList = new MyLinkedList(value,restOfList);
         this.value = newValue;
     }
 
-    public void addNewLink(LinkedList list) {
+    public void addNewLink(MyLinkedList list) {
         if (restOfList != null) {
             restOfList.addNewLink(list);
         } else {

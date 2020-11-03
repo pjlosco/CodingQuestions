@@ -25,7 +25,9 @@ public class GCD {
                 for (Integer value : shortList) {
                     if (value == possibleDenominator) {
                         continue;
-                    } else if (value % possibleDenominator != 0) {
+                    }
+
+                    if (value % possibleDenominator != 0) {
                         foundGCD = false;
                         break;
                     } else {

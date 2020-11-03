@@ -1,25 +1,25 @@
-import junit.framework.Assert;
 import org.junit.Test;
+import org.junit.Assert;
 
 /**
  Design an algorithm and test cases for the following problem. Take a string and find if it contains a pallindrome.
  */
-public class Pallindrome {
+public class Palindrome {
 
-    boolean containsPallindrome(String phrase) {
+    boolean containsPalindrome(String phrase) {
         if (phrase == null || phrase.isEmpty()){
             return false;
         }
         String[] words = phrase.split(" ");
         for(String word : words) {
-            if (isPallindrome(word)) {
+            if (isPalindrome(word)) {
                 return true;
             }
         }
         return false;
     }
 
-    boolean isPallindrome(String phrase) {
+    boolean isPalindrome(String phrase) {
         if (phrase == null || phrase.isEmpty()){
             return false;
         }
@@ -44,56 +44,61 @@ public class Pallindrome {
 
     @Test
     public void NullCheck() {
-        Assert.assertFalse(containsPallindrome(null));
+        Assert.assertFalse(containsPalindrome(null));
     }
 
     @Test
     public void Empty() {
-        Assert.assertFalse(containsPallindrome(""));
+        Assert.assertFalse(containsPalindrome(""));
     }
 
     @Test
     public void SimplePhrase() {
-        Assert.assertFalse(containsPallindrome("phrase"));
+        Assert.assertFalse(containsPalindrome("phrase"));
     }
 
     @Test
     public void SimplePhrase2() {
-        Assert.assertTrue(containsPallindrome("a"));
+        Assert.assertTrue(containsPalindrome("a"));
     }
 
     @Test
     public void SimplePhrase3() {
-        Assert.assertTrue(containsPallindrome("aba"));
+        Assert.assertTrue(containsPalindrome("aba"));
     }
 
     @Test
     public void SimplePhrase4() {
-        Assert.assertTrue(containsPallindrome("abba"));
+        Assert.assertTrue(containsPalindrome("abba"));
     }
 
     @Test
     public void SimplePhrase5() {
-        Assert.assertFalse(containsPallindrome("aabb"));
+        Assert.assertFalse(containsPalindrome("aabb"));
     }
 
     @Test
     public void Phrase() {
-        Assert.assertTrue(containsPallindrome("I'm going out with hannah"));
+        Assert.assertFalse(containsPalindrome("I'm going to the mall"));
     }
 
     @Test
     public void Phrase2() {
-        Assert.assertTrue(containsPallindrome("Contains a pallindrome?"));
+        Assert.assertTrue(containsPalindrome("Contains a palindrome?"));
     }
 
     @Test
     public void Phrase3() {
-        Assert.assertFalse(containsPallindrome("foo oof"));
+        Assert.assertFalse(containsPalindrome("foo oof"));
     }
 
     @Test
     public void LongPhrase() {
-        Assert.assertFalse(containsPallindrome("hu uysd popcxiuh wpeiuh zl;uxhp wh syiuzgc oyag jhdbasdyu owyeg oayg xkjhzcbyweg couyiebw cyoz uhcb auyb ouwhbec kzuyxcg kuhbwe kuyaszk hcb xcefwfoo oof"));
+        Assert.assertFalse(containsPalindrome("hu uysd popcxiuh wpeiuh zl;uxhp wh syiuzgc oyag jhdbasdyu owyeg oayg xkjhzcbyweg couyiebw cyoz uhcb auyb ouwhbec kzuyxcg kuhbwe kuyaszk hcb xcefwfoo oof"));
+    }
+
+    @Test
+    public void FamousPhrase() {
+        Assert.assertTrue(containsPalindrome("a man a plan a canal panama"));
     }
 }
